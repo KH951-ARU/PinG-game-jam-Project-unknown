@@ -28,7 +28,7 @@ use_collision = true
 mesh = SubResource("BoxMesh_dkwgp")
 
 [node name="wall" type="CSGMesh3D" parent="."]
-transform = Transform3D(-1.53755, 0, 0, 0, 1.1953, 0, 0, 0, -0.930575, 0, 0.904423, 0.535209)
+transform = Transform3D(-1.53755, 0, 0, 0, 3.5859, 0, 0, 0, -0.930575, 0, 2.0991, 0.535209)
 use_collision = true
 mesh = SubResource("BoxMesh_dkwgp")
 
@@ -47,7 +47,11 @@ shape = SubResource("CapsuleShape3D_fom3o")
 script = ExtResource("3_7v4m7")
 
 [node name="h(yaw)" type="Node3D" parent="player/CamRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.53226, 0)
 
 [node name="w(pitch)" type="Node3D" parent="player/CamRoot/h(yaw)"]
 
-[node name="Camera3D" type="Camera3D" parent="player/CamRoot/h(yaw)/w(pitch)"]
+[node name="SpringArm3D" type="SpringArm3D" parent="player/CamRoot/h(yaw)/w(pitch)"]
+spring_length = 1.2
+
+[node name="Camera3D" type="Camera3D" parent="player/CamRoot/h(yaw)/w(pitch)/SpringArm3D"]

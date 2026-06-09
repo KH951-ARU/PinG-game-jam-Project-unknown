@@ -7,14 +7,23 @@ extends Node
 
 var h : float = 0
 var w : float = 0
+var h_sensitivity : float = 0.07
+var w_sensitivity : float = 0.07
+var h_acceleration : float = 10
+var w_acceleration : float = 10
 
+## functions and operations
+func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+func _input(event):
+	if event is InputEventMouseMotion:
+		h += -event.relative.x * h_sensitivity
+		w += event.relative.y * w_sensitivity
+		
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func _physics_process(delta):
+	h_node.rotation_degrees.y = lerp(h_node.rotation_degrees.y, h, h_acceleration * delta)
+	w_node.rotation_degrees.y = lerp(w_node.rotation_degrees.x, w, w_acceleration * delta)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+##https://www.youtube.com/watch?v=C-1AerTEjFU
