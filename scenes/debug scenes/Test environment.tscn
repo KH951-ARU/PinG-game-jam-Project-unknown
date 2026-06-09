@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://cddlkq8x2mrar"]
+
+[ext_resource type="Texture2D" uid="uid://kuss1t1oy750" path="res://scenes/debug scenes/Grid.png" id="1_7yhgv"]
+[ext_resource type="PackedScene" uid="uid://cga0ie76qft8s" path="res://Character/godot_chan_4.tscn" id="2_blf6w"]
+[ext_resource type="Script" uid="uid://cwau87pgr3x46" path="res://Character/scripts/cam_control.gd" id="3_7v4m7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c3ryw"]
+albedo_color = Color(0.466181, 0.466181, 0.466181, 1)
+albedo_texture = ExtResource("1_7yhgv")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_dkwgp"]
+material = SubResource("StandardMaterial3D_c3ryw")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fom3o"]
+height = 3.20728
+
+[node name="TestEnvironment" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="floor" type="CSGMesh3D" parent="."]
+transform = Transform3D(27.9399, 0, 0, 0, 0.564946, 0, 0, 0, 25.3494, 0, 0, 0)
+use_collision = true
+mesh = SubResource("BoxMesh_dkwgp")
+
+[node name="wall" type="CSGMesh3D" parent="."]
+transform = Transform3D(-1.53755, 0, 0, 0, 1.1953, 0, 0, 0, -0.930575, 0, 0.904423, 0.535209)
+use_collision = true
+mesh = SubResource("BoxMesh_dkwgp")
+
+[node name="player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.440652, -2.15169)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35076, 0)
+shape = SubResource("CapsuleShape3D_fom3o")
+
+[node name="MeshRoot" type="Node3D" parent="player"]
+
+[node name="godot_chan_4" parent="player/MeshRoot" instance=ExtResource("2_blf6w")]
+
+[node name="CamRoot" type="Node3D" parent="player"]
+script = ExtResource("3_7v4m7")
+
+[node name="h(yaw)" type="Node3D" parent="player/CamRoot"]
+
+[node name="w(pitch)" type="Node3D" parent="player/CamRoot/h(yaw)"]
+
+[node name="Camera3D" type="Camera3D" parent="player/CamRoot/h(yaw)/w(pitch)"]
