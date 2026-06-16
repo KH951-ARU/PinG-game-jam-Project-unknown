@@ -3,7 +3,7 @@ extends Node
 
 @onready var h_node =$"h(yaw)"
 @onready var w_node =$"h(yaw)/w(pitch)"
-@onready var cam = $"h(yaw)/w(pitch)/Camera3D"
+@onready var cam = $"h(yaw)/w(pitch)/SpringArm3D/Camera3D"
 
 var h : float = 0
 var w : float = 0
@@ -12,18 +12,24 @@ var w_sensitivity : float = 0.07
 var h_acceleration : float = 10
 var w_acceleration : float = 10
 
+var pitch_max : float = -55
+var pitch_min : float = 75
+
 ## functions and operations
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _input(event):
 	if event is InputEventMouseMotion:
-		h += -event.relative.x * h_sensitivity
-		w += event.relative.y * w_sensitivity
+		h += event.relative.x * h_sensitivity
+		w += -event.relative.y * w_sensitivity
 		
 
 func _physics_process(delta):
-	h_node.rotation_degrees.y = lerp(h_node.rotation_degrees.y, h, h_acceleration * delta)
-	w_node.rotation_degrees.y = lerp(w_node.rotation_degrees.x, w, w_acceleration * delta)
-
-##https://www.youtube.com/watch?v=C-1AerTEjFU
+	w = clamp( w , pitch_min , pitch_max)
+	
+	#h_node.rotation_degrees.y = lerp(h_node.rotation_degrees.y, h, h_acceleration * delta)
+	#w_node.rotation_degrees.x = lerp(w_node.rotation_degrees.x, w, w_acceleration * delta)
+	
+	h_node.rotation_degrees.y = h
+	w_node.rotation_degrees.x = w

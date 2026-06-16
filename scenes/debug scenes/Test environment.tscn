@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cddlkq8x2mrar"]
+[gd_scene load_steps=8 format=3 uid="uid://cddlkq8x2mrar"]
 
 [ext_resource type="Texture2D" uid="uid://kuss1t1oy750" path="res://scenes/debug scenes/Grid.png" id="1_7yhgv"]
 [ext_resource type="PackedScene" uid="uid://cga0ie76qft8s" path="res://Character/godot_chan_4.tscn" id="2_blf6w"]
@@ -15,6 +15,9 @@ material = SubResource("StandardMaterial3D_c3ryw")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fom3o"]
 height = 3.20728
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_blf6w"]
+radius = 0.7
 
 [node name="TestEnvironment" type="Node3D"]
 
@@ -52,6 +55,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.53226, 0)
 [node name="w(pitch)" type="Node3D" parent="player/CamRoot/h(yaw)"]
 
 [node name="SpringArm3D" type="SpringArm3D" parent="player/CamRoot/h(yaw)/w(pitch)"]
-spring_length = 1.2
+shape = SubResource("SphereShape3D_blf6w")
+spring_length = 3.0
 
 [node name="Camera3D" type="Camera3D" parent="player/CamRoot/h(yaw)/w(pitch)/SpringArm3D"]
