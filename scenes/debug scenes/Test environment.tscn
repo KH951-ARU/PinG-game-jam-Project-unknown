@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cddlkq8x2mrar"]
+[gd_scene load_steps=10 format=3 uid="uid://cddlkq8x2mrar"]
 
 [ext_resource type="Texture2D" uid="uid://kuss1t1oy750" path="res://scenes/debug scenes/Grid.png" id="1_7yhgv"]
+[ext_resource type="Script" uid="uid://bfijuj2fglvqe" path="res://scenes/debug scenes/player.gd" id="2_7v4m7"]
 [ext_resource type="PackedScene" uid="uid://cga0ie76qft8s" path="res://Character/godot_chan_4.tscn" id="2_blf6w"]
-[ext_resource type="Script" uid="uid://cwau87pgr3x46" path="res://Character/scripts/cam_control.gd" id="3_7v4m7"]
+[ext_resource type="Script" uid="uid://cwau87pgr3x46" path="res://Character/scripts/cam/cam_control.gd" id="3_7v4m7"]
+[ext_resource type="Script" uid="uid://jpcnslimvy6x" path="res://scenes/debug scenes/movement_controller.gd" id="6_wmi7k"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c3ryw"]
 albedo_color = Color(0.466181, 0.466181, 0.466181, 1)
@@ -37,10 +39,16 @@ mesh = SubResource("BoxMesh_dkwgp")
 
 [node name="player" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.440652, -2.15169)
+script = ExtResource("2_7v4m7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35076, 0)
 shape = SubResource("CapsuleShape3D_fom3o")
+
+[node name="movementController" type="Node" parent="player" node_paths=PackedStringArray("player", "mesh_root")]
+script = ExtResource("6_wmi7k")
+player = NodePath("..")
+mesh_root = NodePath("../MeshRoot")
 
 [node name="MeshRoot" type="Node3D" parent="player"]
 
@@ -59,3 +67,6 @@ shape = SubResource("SphereShape3D_blf6w")
 spring_length = 3.0
 
 [node name="Camera3D" type="Camera3D" parent="player/CamRoot/h(yaw)/w(pitch)/SpringArm3D"]
+
+[connection signal="set_movement_direction" from="player" to="player/movementController" method="_on_set_movement_dircetion"]
+[connection signal="set_movement_state" from="player" to="player/movementController" method="_on_set_movement_state"]
