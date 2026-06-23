@@ -7,6 +7,7 @@ signal set_movement_direction(_movement_direction: Vector3)
 
 var movement_direction : Vector3 
 
+
 func _input(event):
 	if event.is_action("movement"):
 		movement_direction.x = Input.get_action_strength("left") - Input.get_action_strength("right")
@@ -22,10 +23,6 @@ func _input(event):
 					set_movement_state.emit(movement_states["run"])
 		else:
 			set_movement_state.emit(movement_states["stand"])
-
-
-
-
 
 func _ready():
 	set_movement_state.emit(movement_states["stand"])

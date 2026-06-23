@@ -1,7 +1,7 @@
 extends Resource
 class_name Movementstate
 
-##Varibles for states
+#Varibles for states
 
 @export var id : int
 @export var movementspeed : float
