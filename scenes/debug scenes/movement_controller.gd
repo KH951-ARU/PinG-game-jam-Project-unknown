@@ -7,7 +7,7 @@ var direction : Vector3
 var velocity : Vector3
 var acceleration : float
 var speed : float
-
+var cam_rotation : float = 0 
 
 func _physics_process(delta):
 	velocity.x = speed * direction.normalized().x
@@ -26,3 +26,6 @@ func _on_set_movement_state(_movement_state: Movementstate):
 
 func _on_set_movement_dircetion(_movement_direction : Vector3):
 	direction = _movement_direction
+
+func _on_set_cam_rotation(_cam_rotation : float):
+	cam_rotation = _cam_rotation
