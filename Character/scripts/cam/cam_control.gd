@@ -18,6 +18,8 @@ var pitch_min : float = -55
 var tween : Tween
 
 signal set_cam_rotation(_cam_rotation : float)
+
+
 ## functions and operations
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
