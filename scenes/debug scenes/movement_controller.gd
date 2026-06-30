@@ -2,7 +2,7 @@ extends Node
 
 @export var player : CharacterBody3D
 @export var mesh_root : Node3D
-@export var rotation_speed : float = 0
+@export var rotation_speed : float = 8
 var direction : Vector3
 var velocity : Vector3
 var acceleration : float
@@ -26,6 +26,7 @@ func _on_set_movement_state(_movement_state: Movementstate):
 
 func _on_set_movement_dircetion(_movement_direction : Vector3):
 	direction = _movement_direction.rotated(Vector3.UP,cam_rotation)
+	print( direction)
 
 func _on_set_cam_rotation(_cam_rotation : float):
 	cam_rotation = _cam_rotation

@@ -26,8 +26,8 @@ func _ready():
 
 func _input(event):
 	if event is InputEventMouseMotion:
-		hyaw += event.relative.x * h_sensitivity
-		wpitch += -event.relative.y * w_sensitivity
+		hyaw += -event.relative.x * h_sensitivity
+		wpitch += event.relative.y * w_sensitivity
 		
 
 func _physics_process(delta):
@@ -36,8 +36,7 @@ func _physics_process(delta):
 	h_node.rotation_degrees.y = lerp(h_node.rotation_degrees.y, hyaw, h_acceleration * delta)
 	w_node.rotation_degrees.x = lerp(w_node.rotation_degrees.x, wpitch, w_acceleration * delta)
 	
-	#h_node.rotation_degrees.y = hyaw
-	#w_node.rotation_degrees.x = wpitch
+	set_cam_rotation.emit(h_node.rotation.y)
  
 func _on_set_movement_state(_movement_state : Movementstate):
 	if tween:
