@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="JumpState" load_steps=2 format=3 uid="uid://13r0nkwg6fqa"]
+
+[ext_resource type="Script" uid="uid://dpjjny2bqycwa" path="res://Character/scripts/msm/jump_state.gd" id="1_0y76p"]
+
+[resource]
+script = ExtResource("1_0y76p")
+animation_name = ""
+jump_height = 3.0
+apex_duration = 0.5
+metadata/_custom_type_script = "uid://dpjjny2bqycwa"
