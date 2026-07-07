@@ -1,7 +1,6 @@
 extends CharacterBody3D
 
-signal set_movement_state(_movement_state: Movementstate)
-signal set_movement_direction(_movement_direction: Vector3)
+
 signal pressed_jump(jump_state : JumpState)
 signal changed_movement_state(_movement_state: Movementstate)
 signal changed_movement_direction(_movement_direction: Vector3)
@@ -9,6 +8,7 @@ signal changed_movement_direction(_movement_direction: Vector3)
 @export var movement_states : Dictionary
 @export var jump_states : Dictionary
 @export var max_air_jump : int = 1
+@export var stances : Dictionary
 var movement_direction : Vector3 
 var air_jump_counter : int = 0 
 
@@ -19,14 +19,14 @@ func _input(event):
 		
 		if is_movement_ongoing():
 			if Input.is_action_pressed("sprint"):
-				set_movement_state.emit(movement_states["sprint"])
+				set_movement_state("sprint")
 			else:
 				if Input.is_action_pressed("walk"):
-					set_movement_state.emit(movement_states["walk"])
+					set_movement_state("walk")
 				else:
-					set_movement_state.emit(movement_states["run"])
+					set_movement_state("run")
 		else:
-			set_movement_state.emit(movement_states["stand"])
+			set_movement_state("stand")
 			
 	if air_jump_counter <= max_air_jump:
 		if Input.is_action_just_pressed("jump"):
@@ -39,11 +39,11 @@ func _input(event):
 			air_jump_counter += 1
 
 func _ready():
-	set_movement_state.emit(movement_states["stand"])
+	set_movement_state("stand")
 	
 func _physics_process(delta):
 	if is_movement_ongoing():
-		set_movement_direction.emit(movement_direction)
+		changed_movement_direction.emit(movement_direction)
 	
 	if is_on_floor():
 		air_jump_counter = 0
@@ -54,4 +54,7 @@ func _physics_process(delta):
 func is_movement_ongoing() -> bool:
 	return abs(movement_direction.x) > 0 or abs(movement_direction.z) > 0
 
-func set_movement_state()
+func set_movement_state( state : String):
+	var stance = get_node(stances[current_stance_name])
+	current_movement_stance_name = state
+	changed_movement_state.emit(stance.get_movement_state(state))
