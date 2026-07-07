@@ -8,7 +8,7 @@ var tween : Tween
 var on_floor_blend : float = 1
 var on_floor_blend_target : float = 1
 var jump_state : JumpState
-
+var current_stance_name = "upright"
 
 func _physics_process(delta):
 	on_floor_blend_target = 1 if player.is_on_floor() else 0
@@ -23,6 +23,10 @@ func _on_set_movement_state(_movement_state: Movementstate):
 		tween.kill()
 	
 	tween = create_tween()
-	tween.tween_property(animation_tree, "parameters/Movement_blend/blend_position", _movement_state.id, 0.25)
+	tween.tween_property(animation_tree, "parameters/"+ current_stance_name + "_movement_blend/blend_position", _movement_state.id, 0.25)
 	tween.parallel().tween_property(animation_tree, "parameters/Movement_animation_speed/scale" , _movement_state.animationspeed, 0.7)
 	pass # Replace with function body.
+
+func on_set_stance(_stance : Stance):
+	animation_tree["parameters/stance-transition/transition_request"] = _stance.name
+	current_stance_name = _stance
