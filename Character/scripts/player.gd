@@ -30,7 +30,7 @@ func _input(event):
 		else:
 			set_movement_state("stand")
 			
-	if Input.is_action_just_pressed("jump"):
+	if event.is_action_just_pressed("jump"):
 		if air_jump_counter <= max_air_jump:
 			if current_stance_name != "upright" and current_stance_name != "stealth":
 				set_stance("upright"):
