@@ -20,6 +20,8 @@ func _input(event):
 		if is_movement_ongoing():
 			if Input.is_action_pressed("sprint"):
 				set_movement_state("sprint")
+				if current_stance_name == "stealth":
+					set_stance("upright")
 			else:
 				if Input.is_action_pressed("walk"):
 					set_movement_state("walk")
@@ -28,8 +30,12 @@ func _input(event):
 		else:
 			set_movement_state("stand")
 			
-	if air_jump_counter <= max_air_jump:
-		if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump"):
+		if air_jump_counter <= max_air_jump:
+			if current_stance_name != "upright" and current_stance_name != "stealth":
+				set_stance("upright"):
+					return
+			
 			var jump_name = "ground_jump"
 			
 			if air_jump_counter > 0:

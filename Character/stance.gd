@@ -14,3 +14,16 @@ class_name Stance
 @export var col_raycast : RayCast3D
 @export var collider : CollisionObject3D
 @export var higher_stances :Array[Stance]
+
+func get_movement_state(state_name : String) -> Movementstate :
+	match state_name:
+		"idle":
+			return idle_state
+		"walk":
+			return walk_state
+		"run":
+			return run_state
+		"sprint":
+			return sprint_state
+		_:
+			return idle_state

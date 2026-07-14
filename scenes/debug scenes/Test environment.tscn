@@ -259,19 +259,19 @@ sprint_state = ExtResource("23_nro6w")
 [node name="godot_chan_4" parent="player/MeshRoot" instance=ExtResource("2_blf6w")]
 
 [node name="Skeleton3D" parent="player/MeshRoot/godot_chan_4/Godot_Chan" index="0"]
-bones/0/position = Vector3(-2.20318e-09, -0.842828, -8.7129)
+bones/0/position = Vector3(-1.48977e-08, -0.101738, -8.13539)
 bones/1/rotation = Quaternion(0.652857, 0.271621, 0.652857, -0.271621)
 bones/2/position = Vector3(-8.87776e-12, 4.51278, 0.000287311)
 bones/2/rotation = Quaternion(0.59418, -4.17457e-10, 1.97743e-08, 0.804332)
 bones/3/position = Vector3(4.90622e-14, 5.69653, -0.00010035)
 bones/3/rotation = Quaternion(-0.117439, -6.02047e-10, 1.68026e-09, 0.99308)
 bones/4/position = Vector3(1.38778e-14, 7.21845, -1.14151e-05)
-bones/4/rotation = Quaternion(-0.132249, 6.86398e-10, -9.53289e-10, 0.991217)
+bones/4/rotation = Quaternion(-0.148266, -5.46518e-16, 7.66788e-16, 0.988948)
 bones/5/rotation = Quaternion(0.0034532, 0.00659531, -0.689901, 0.723865)
 bones/6/position = Vector3(0.000202688, 10.6318, -7.59092e-05)
-bones/6/rotation = Quaternion(-0.0782686, 0.17212, -0.575555, 0.795604)
+bones/6/rotation = Quaternion(-0.0803701, 0.171036, -0.567028, 0.801728)
 bones/7/position = Vector3(-0.000310951, 19.8107, 9.49435e-05)
-bones/7/rotation = Quaternion(0.276937, -0.453726, -0.17075, 0.829628)
+bones/7/rotation = Quaternion(0.26208, -0.450963, -0.165907, 0.836912)
 bones/8/position = Vector3(6.13972e-05, 18.4529, -1.79678e-05)
 bones/8/rotation = Quaternion(0.121656, 0.740931, -0.0153585, 0.660292)
 bones/9/position = Vector3(-1.22998, 8.21134, 0.541574)
@@ -305,9 +305,9 @@ bones/22/rotation = Quaternion(0.399338, 0.245846, -0.0781066, 0.879766)
 bones/23/position = Vector3(-6.24048e-05, 2.81428, 7.71953e-05)
 bones/24/rotation = Quaternion(0.00345325, -0.00659526, 0.689901, 0.723865)
 bones/25/position = Vector3(-0.000210236, 10.6318, -7.73641e-05)
-bones/25/rotation = Quaternion(-0.191485, 0.0944686, 0.569147, 0.794029)
+bones/25/rotation = Quaternion(-0.190873, 0.0964624, 0.561773, 0.799171)
 bones/26/position = Vector3(0.000305885, 19.8107, 9.93949e-05)
-bones/26/rotation = Quaternion(0.153094, 0.426253, 0.230091, 0.861353)
+bones/26/rotation = Quaternion(0.142089, 0.423239, 0.218289, 0.867773)
 bones/27/position = Vector3(-5.59034e-05, 18.4529, -2.43276e-05)
 bones/27/rotation = Quaternion(0.101894, -0.868841, 0.0345363, 0.48326)
 bones/28/position = Vector3(1.22998, 8.21133, 0.541565)
@@ -339,18 +339,18 @@ bones/40/rotation = Quaternion(-0.296122, 0.786217, 0.529577, -0.117146)
 bones/41/position = Vector3(6.47332e-05, 2.41782, -0.000199073)
 bones/41/rotation = Quaternion(0.399275, -0.245733, 0.0782085, 0.879817)
 bones/42/position = Vector3(-0.000197773, 2.81332, 0.000139418)
-bones/43/rotation = Quaternion(0.164949, -1.16129e-09, 2.54343e-09, 0.986302)
+bones/43/rotation = Quaternion(0.189962, -6.25161e-10, 1.1638e-09, 0.981791)
 bones/44/position = Vector3(-3.10862e-15, 9.35612, 0.000138467)
-bones/45/rotation = Quaternion(0.934099, 0.178458, -0.282934, -0.124741)
+bones/45/rotation = Quaternion(0.930785, 0.185293, -0.278506, -0.147444)
 bones/46/position = Vector3(4.13436e-06, 32.5686, -7.47821e-05)
-bones/46/rotation = Quaternion(0.182355, 0.2261, -0.0242585, 0.956576)
-bones/47/rotation = Quaternion(-0.452925, 0.0997025, 0.0792564, 0.882404)
+bones/46/rotation = Quaternion(0.151652, 0.220103, -0.00938061, 0.963571)
+bones/47/rotation = Quaternion(-0.446055, 0.101, 0.0788692, 0.885784)
 bones/48/rotation = Quaternion(-0.268793, 0.0202766, 0.0276453, 0.962588)
 bones/49/position = Vector3(-7.9319, -2.35348, -1.35573)
-bones/49/rotation = Quaternion(0.865884, -0.240146, 0.314288, -0.306264)
-bones/50/rotation = Quaternion(0.225016, -0.364176, 0.0700183, 0.901022)
+bones/49/rotation = Quaternion(0.85322, -0.252276, 0.304638, -0.339954)
+bones/50/rotation = Quaternion(0.166597, -0.37393, 0.0379033, 0.911584)
 bones/51/position = Vector3(-0.000429504, 31.1547, -1.11843e-05)
-bones/51/rotation = Quaternion(-0.676885, -0.00619878, -0.0598521, 0.733625)
+bones/51/rotation = Quaternion(-0.654967, 0.00163514, -0.0367336, 0.754763)
 bones/52/position = Vector3(0.000456973, 9.98217, 6.83495e-05)
 bones/52/rotation = Quaternion(-0.268793, -0.0202766, -0.0276453, 0.962588)
 
@@ -389,12 +389,6 @@ spring_length = 3.0
 
 [node name="Camera3D" type="Camera3D" parent="player/CamRoot/h(yaw)/w(pitch)/SpringArm3D"]
 
-[connection signal="pressed_jump" from="player" to="player/movementController" method="_jump"]
-[connection signal="pressed_jump" from="player" to="player/animationController" method="_jump"]
-[connection signal="set_movement_direction" from="player" to="player/movementController" method="_on_set_movement_dircetion"]
-[connection signal="set_movement_state" from="player" to="player/movementController" method="_on_set_movement_state"]
-[connection signal="set_movement_state" from="player" to="player/animationController" method="_on_set_movement_state"]
-[connection signal="set_movement_state" from="player" to="player/CamRoot" method="_on_set_movement_state"]
 [connection signal="set_cam_rotation" from="player/CamRoot" to="player/movementController" method="_on_set_cam_rotation"]
 
 [editable path="player/MeshRoot/godot_chan_4"]
