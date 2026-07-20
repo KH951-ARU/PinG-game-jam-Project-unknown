@@ -29,4 +29,4 @@ func _on_set_movement_state(_movement_state: Movementstate):
 
 func on_set_stance(_stance : Stance):
 	animation_tree["parameters/stance-transition/transition_request"] = _stance.name
-	current_stance_name = _stance
+	current_stance_name = _stance.name
