@@ -3,6 +3,7 @@ extends Node
 
 @onready var h_node =$"h(yaw)"
 @onready var w_node =$"h(yaw)/w(pitch)"
+@onready var spring_arm =$"h(yaw)/w(pitch)/SpringArm3D"
 @onready var cam = $"h(yaw)/w(pitch)/SpringArm3D/Camera3D"
 
 var hyaw : float = 0
@@ -17,12 +18,19 @@ var pitch_min : float = -55
 
 var tween : Tween
 
+var position_offset : Vector3 = Vector3(0, 1.3, 0)
+var position_offset_target : Vector3 = Vector3(0, 1.3, 0)
+
+@export var player = CharacterBody3D
+
 signal set_cam_rotation(_cam_rotation : float)
 
 
 ## functions and operations
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	spring_arm.add_excluded_object(player.get_rid())
+	top_level = true 
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -31,6 +39,9 @@ func _input(event):
 		
 
 func _physics_process(delta):
+	position_offset = lerp(position_offset, position_offset_target, 4 * delta)
+	global_position = lerp(global_position, player.global_position + position_offset, 18 * delta)
+	
 	wpitch = clamp( wpitch , pitch_min , pitch_max)
 	
 	h_node.rotation_degrees.y = lerp(h_node.rotation_degrees.y, hyaw, h_acceleration * delta)
@@ -44,3 +55,6 @@ func _on_set_movement_state(_movement_state : Movementstate):
 		
 	tween = create_tween()
 	tween.tween_property(cam, "fov",_movement_state.camera_fov,0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+func _on_set_stance(_stance : Stance):
+	position_offset_target.y = _stance.camera_height

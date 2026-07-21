@@ -15,6 +15,9 @@ class_name Stance
 @export var collider : CollisionObject3D
 @export var higher_stances :Array[Stance]
 
+func is_blocked() -> bool:
+	return col_raycast and col_raycast.is_colliding()
+
 func get_movement_state(state_name : String) -> Movementstate :
 	match state_name:
 		"idle":

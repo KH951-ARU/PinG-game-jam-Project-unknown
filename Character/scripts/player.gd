@@ -37,6 +37,9 @@ func _input(event):
 			
 	if event.is_action_just_pressed("jump"):
 		if air_jump_counter <= max_air_jump:
+			if is_stance_blocked("upright"):
+				return
+			
 			if current_stance_name != "upright" and current_stance_name != "stealth":
 				set_stance("upright")
 				return
@@ -75,12 +78,18 @@ func set_movement_state( state : String):
 	changed_movement_state.emit(stance.get_movement_state(state))
 
 func set_stance(_stance_name : String):
+	if  stance_antispam_timer.time_left > 0:
+		return
+	stance_antispam_timer = get_tree().create_timer(0.25)
 	var next_stance_name : String
 	
 	if _stance_name == current_stance_name:
 		next_stance_name = "upright"
 	else:
 		next_stance_name = _stance_name
+	
+	if is_stance_blocked(next_stance_name):
+		return
 	
 	var current_stance = get_node(stances[current_stance_name])
 	current_stance.collider.disabled = true
@@ -91,3 +100,7 @@ func set_stance(_stance_name : String):
 	
 	changed_stance.emit(current_stance)
 	set_movement_state(current_movement_state_name)
+
+func is_stance_blocked(_stance_name : String) -> bool:
+	var stance = get_node(stances[_stance_name])
+	return stance.is_blocked()
