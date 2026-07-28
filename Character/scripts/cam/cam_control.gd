@@ -1,4 +1,4 @@
-extends Node
+extends Node3D
 ## variables for camera system
 
 @onready var h_node =$"h(yaw)"
@@ -20,8 +20,7 @@ var tween : Tween
 
 var position_offset : Vector3 = Vector3(0, 1.3, 0)
 var position_offset_target : Vector3 = Vector3(0, 1.3, 0)
-
-@export var player = CharacterBody3D
+@export var player : CharacterBody3D
 
 signal set_cam_rotation(_cam_rotation : float)
 

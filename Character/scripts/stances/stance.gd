@@ -12,7 +12,7 @@ class_name Stance
 
 @export_category("collison data")
 @export var col_raycast : RayCast3D
-@export var collider : CollisionObject3D
+@export var collider : CollisionShape3D 
 @export var higher_stances :Array[Stance]
 
 func is_blocked() -> bool:

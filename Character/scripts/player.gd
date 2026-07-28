@@ -11,14 +11,18 @@ signal changed_movement_direction(_movement_direction: Vector3)
 @export var max_air_jump : int = 1
 @export var stances : Dictionary
 
+@export_group("collisons")
+@onready var uprightcollision = $"Upright collision"
+@onready var crouchedcollision = $"Upright collision"
+
 var movement_direction : Vector3 
 var air_jump_counter : int = 0 
 var current_stance_name : String = "upright"
 var current_movement_state_name : String
 var stance_antispam_timer : SceneTreeTimer
 
-func _input(event):
-	if event.is_action_pressed("movement") or event.is_action_released("movement"):
+func _input(Input):
+	if Input.is_action_pressed("movement") or Input.is_action_released("movement"):
 		movement_direction.x = Input.get_action_strength("left") - Input.get_action_strength("right")
 		movement_direction.z = Input.get_action_strength("forward") - Input.get_action_strength("back")
 		
@@ -35,7 +39,7 @@ func _input(event):
 		else:
 			set_movement_state("stand")
 			
-	if event.is_action_just_pressed("jump"):
+	if Input.is_action_pressed("jump"):
 		if air_jump_counter <= max_air_jump:
 			if is_stance_blocked("upright"):
 				return
@@ -53,7 +57,7 @@ func _input(event):
 			air_jump_counter += 1
 	if is_on_floor():
 		for stance in stances.keys():
-			if event.is_action_pressed(stance):
+			if Input.is_action_pressed(stance):
 				set_stance(stance)
 
 func _ready():
@@ -78,9 +82,11 @@ func set_movement_state( state : String):
 	changed_movement_state.emit(stance.get_movement_state(state))
 
 func set_stance(_stance_name : String):
-	if  stance_antispam_timer.time_left > 0:
-		return
+	# If you want to use the timer, uncomment these lines safely:
+	# if stance_antispam_timer and stance_antispam_timer.time_left > 0:
+	#     return
 	stance_antispam_timer = get_tree().create_timer(0.25)
+	
 	var next_stance_name : String
 	
 	if _stance_name == current_stance_name:
@@ -91,14 +97,21 @@ func set_stance(_stance_name : String):
 	if is_stance_blocked(next_stance_name):
 		return
 	
-	var current_stance = get_node(stances[current_stance_name])
-	current_stance.collider.disabled = true
+	# 1. Fetch and safely disable the old stance collider
+	var old_stance = get_node(stances[current_stance_name])
+	if old_stance and old_stance.collider:
+		old_stance.collider.set_deferred("disabled", true)
 	
+	# 2. Update to the new stance name pointer
 	current_stance_name = next_stance_name
-	current_stance = get_node(stances[current_stance_name])
-	current_stance.collidor.disabled = false
 	
-	changed_stance.emit(current_stance)
+	# 3. Fetch and safely enable the new stance collider
+	var new_stance = get_node(stances[current_stance_name])
+	if new_stance and new_stance.collider:
+		new_stance.collider.set_deferred("disabled", false)
+	
+	# 4. Emit the updated active node out to your camera script
+	changed_stance.emit(new_stance)
 	set_movement_state(current_movement_state_name)
 
 func is_stance_blocked(_stance_name : String) -> bool:
